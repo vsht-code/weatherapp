@@ -1,8 +1,18 @@
 import requests
 
-url = 'https://wttr.in/san%20francisco?nTqu&lang=en'
+cities = ['london', 'svo', 'cherepovets']
 
-response = requests.get(url)
-response.raise_for_status()
+local_params_ru = {
+    'nTqmM': '',
+    'lang': 'ru',
+    }
 
-print(response.text)
+url_template = 'https://wttr.in/{}'
+
+for city in cities:
+    url = url_template.format(city)
+
+    response = requests.get(url, params=local_params_ru)
+    response.raise_for_status()
+
+    print(response.text)
